@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../layout/Header'
+import Header from '../Layout/Header'
 import Footer from '../Footer'
 import PrivacyPolicy from '../Privacy'
 function Home() {
