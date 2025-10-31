@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../Layout/Header'
 import Footer from '../Footer'
 import PrivacyPolicy from '../Privacy'
+import Header from '../Layout/Header'
 function Home() {
   return (
     <div>

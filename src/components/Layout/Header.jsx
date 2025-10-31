@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, User, ShoppingCart, Search } from "lucide-react";
-import { useCart } from "../../components/CartContext";
+import { useCart } from "../CartContext";
 import { NavLink } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
