@@ -1,17 +1,17 @@
 // src/components/AboutUsPage.jsx
 
 import React from 'react';
-import AboutUsHero from '../components/AboutUsHero';
-import MissionVision from '../components/MissionVision';
-import OurValues from '../components/OurValues'; 
-import CompanyHistory from '../components/CompanyHistory';
-import Footer from '../components/Footer';
-import Header from '../components/layout/Header';
+import AboutUsHero from '../AboutUsHero';
+import MissionVision from '../MissionVision';
+import OurValues from '../OurValues'; 
+import CompanyHistory from '../CompanyHistory';
+import Footer from '../Footer';
+import Header from '../layout/Header';
 
 const AboutUsPage = () => {
   return (
     <div> <Header />
-    <div className="min-h-screen bg-gradient-to-r from-purple-600 to-blue-500 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-r from-purple-`500 to-blue-500 py-16 px-4 sm:px-6 lg:px-8">
      
       <div className="max-w-7xl mx-auto space-y-16">
         

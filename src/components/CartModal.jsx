@@ -64,7 +64,7 @@ const CartModal = () => {
       {/* Modal */}
       <div className="fixed right-0 top-0 h-full w-full sm:w-[450px] bg-white shadow-2xl z-[301] animate-slideInRight flex flex-col">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-blue-500 p-6 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-green-600 to-blue-500 p-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <ShoppingBag className="w-7 h-7 text-white" />
             <div>
@@ -142,7 +142,7 @@ const CartModal = () => {
 
                     {/* Price */}
                     <div className="text-right">
-                      <p className="font-bold text-purple-600">
+                      <p className="font-bold text-green-600">
                         {formatPrice(item.price * item.quantity)}
                       </p>
                       {item.quantity > 1 && (
@@ -178,14 +178,14 @@ const CartModal = () => {
 
             <div className="flex justify-between items-center py-3 border-t border-gray-300">
               <span className="text-lg font-semibold text-gray-700">Итого:</span>
-              <span className="text-2xl font-bold text-purple-600">
+              <span className="text-2xl font-bold text-green-600">
                 {formatPrice(getTotalPrice())}
               </span>
             </div>
 
             <button
               onClick={handleCheckout}
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-4 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-blue-600 transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-95"
+              className="w-full bg-gradient-to-r from-green-600 to-blue-500 text-white py-4 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-blue-600 transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-95"
             >
               Оформить заказ (в WhatsApp)
             </button>

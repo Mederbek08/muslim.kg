@@ -149,7 +149,7 @@ export const CustomCursor = ({ isLoading = false }) => {
       {/* 2. ОСНОВНОЙ КУРСОР (Main Cursor) */}
       <div 
         style={mainCursorStyle} 
-        className={`${baseClass} w-5 h-5 bg-gradient-to-r from-purple-500 to-blue-500`} 
+        className={`${baseClass} w-5 h-5 bg-gradient-to-r from-green-500 to-blue-500`} 
       />
     </>
   );

@@ -1,20 +1,37 @@
-import React from 'react';
-import { Instagram, Send, Youtube, Mail, Phone, MapPin, Facebook, Twitter } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Instagram, Send, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 function Footer() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,   
+      mirror: true,  
+    });
+  }, []);
+
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-black text-white ">
+    <footer
+      className="bg-gradient-to-b from-gray-900 to-black text-white"
+      data-aos="fade-up"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
           {/* Brand Section */}
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
+              <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
                 <span className="text-white text-xl font-bold">M</span>
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
                 Muslim_kg
               </span>
             </div>
@@ -27,78 +44,102 @@ function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="text-center md:text-left">
+          {/* Разработчики */}
+          <div className="text-center md:text-left" data-aos="fade-up" data-aos-delay="300">
             <h3 className="text-lg font-bold mb-4 text-white">Разработчики</h3>
             <ul className="space-y-2">
-              {[ 'Mederbek08',].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-400 hover:text-purple-400 transition-colors duration-200 text-sm inline-block hover:translate-x-1 transform"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-green-400 transition-colors duration-200 text-sm inline-block hover:translate-x-1 transform"
+                >
+                  Mederbek
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Company Info */}
-          <div className="text-center md:text-left">
+          {/* Информация */}
+          <div className="text-center md:text-left" data-aos="fade-up" data-aos-delay="400">
             <h3 className="text-lg font-bold mb-4 text-white">Информация</h3>
             <ul className="space-y-2">
               <li>
-                <NavLink to="/about" className="text-gray-400 hover:text-purple-400 transition-colors duration-200 text-sm inline-block hover:translate-x-1 transform">
+                <NavLink
+                  to="/about"
+                  className="text-gray-400 hover:text-green-400 transition-colors duration-200 text-sm inline-block hover:translate-x-1 transform"
+                >
                   О нас
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/policy" className="text-gray-400 hover:text-purple-400 transition-colors duration-200 text-sm inline-block hover:translate-x-1 transform">
+                <NavLink
+                  to="/policy"
+                  className="text-gray-400 hover:text-green-400 transition-colors duration-200 text-sm inline-block hover:translate-x-1 transform"
+                >
                   Политика конфиденциальности
                 </NavLink>
               </li>
               <li>
-                <a href="#contacts" className="text-gray-400 hover:text-purple-400 transition-colors duration-200 text-sm inline-block hover:translate-x-1 transform">
+                <a
+                  href="#contacts"
+                  className="text-gray-400 hover:text-green-400 transition-colors duration-200 text-sm inline-block hover:translate-x-1 transform"
+                >
                   Контакты
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Contact & Social */}
-          <div className="text-center md:text-left">
+          {/* Контакты и соцсети */}
+          <div className="text-center md:text-left" data-aos="fade-up" data-aos-delay="500">
             <h3 className="text-lg font-bold mb-4 text-white">Связаться с нами</h3>
             <div className="space-y-3 mb-6">
-              <a href="tel:+996050207" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-purple-400 transition-colors text-sm">
+              <a
+                href="tel:+996999050207"
+                className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-green-400 transition-colors text-sm"
+              >
                 <Phone className="w-4 h-4" />
                 <span>+996 999 050 207</span>
               </a>
-              <a href="mailto:info@muslim.kg" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-purple-400 transition-colors text-sm">
+              <a
+                href="mailto:info@muslim.kg"
+                className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-green-400 transition-colors text-sm"
+              >
                 <Mail className="w-4 h-4" />
                 <span>info@muslim.kg</span>
               </a>
             </div>
-            
+
             {/* Social Media Icons */}
             <div className="flex gap-3 justify-center md:justify-start">
+              {/* Instagram */}
               <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-purple-600 transition-colors"
+                href="https://www.instagram.com/muslim.kgz_?igsh=ZHV1Y2tmdDU1Nzd1&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 transition-transform duration-300 transform hover:scale-125"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
               </a>
+
+              {/* Telegram */}
               <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-colors"
+                href="https://t.me/mederbek_7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-500 transition-transform duration-300 transform hover:scale-125"
                 aria-label="Telegram"
               >
                 <Send className="w-5 h-5" />
               </a>
+
+              {/* YouTube */}
               <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors"
+                href="https://www.youtube.com/@Muslim7kg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-transform duration-300 transform hover:scale-125"
                 aria-label="YouTube"
               >
                 <Youtube className="w-5 h-5" />
@@ -108,7 +149,7 @@ function Footer() {
         </div>
 
         {/* Карта */}
-        <div className="mb-8">
+        <div className="mb-8" data-aos="fade-up" data-aos-delay="600">
           <h4 className="text-lg font-semibold mb-4">Наше местоположение</h4>
           <div className="w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
             <iframe
@@ -125,11 +166,14 @@ function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-gray-800">
+        <div
+          className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-gray-800"
+          data-aos="fade-up"
+          data-aos-delay="700"
+        >
           <p className="text-sm text-gray-400">
             © 2025 Muslim_kg. Все права защищены.
           </p>
-   
         </div>
       </div>
     </footer>

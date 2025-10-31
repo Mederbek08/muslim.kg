@@ -14,7 +14,7 @@ const Slider = () => {
       subtitle: "Эксклюзивные товары для вас",
       description: "Откройте для себя уникальный стиль",
       icon: ShoppingBag,
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80",
+      image: "https://www.cheggindia.com/wp-content/uploads/2025/07/gk-226301-importance-of-sports-v1.png",
       badge: "Новинка"
     },
     {
@@ -23,7 +23,7 @@ const Slider = () => {
       subtitle: "Только лучшие бренды",
       description: "Гарантия качества на все товары",
       icon: Star,
-      image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800&q=80",
+      image: "https://i.pinimg.com/474x/d7/7d/6b/d77d6b0f946a376ff3c5f6d13aabbccf.jpg",
       badge: "Хит продаж"
     },
     {
@@ -32,7 +32,7 @@ const Slider = () => {
       subtitle: "Скидки до 50%",
       description: "Не упустите выгодные цены",
       icon: TrendingUp,
-      image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=80",
+      image: "https://i.pinimg.com/736x/18/b2/5f/18b25f0915c946ca9cb7a8e65439410f.jpg",
       badge: "Акция"
     }
   ];
@@ -40,7 +40,7 @@ const Slider = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(timer);
   }, [currentSlide]);
@@ -49,7 +49,7 @@ const Slider = () => {
     if (!isAnimating) {
       setIsAnimating(true);
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-      setTimeout(() => setIsAnimating(false), 500);
+      setTimeout(() => setIsAnimating(false), 300);
     }
   };
 
@@ -57,7 +57,7 @@ const Slider = () => {
     if (!isAnimating) {
       setIsAnimating(true);
       setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-      setTimeout(() => setIsAnimating(false), 500);
+      setTimeout(() => setIsAnimating(false), 300);
     }
   };
 
@@ -65,12 +65,12 @@ const Slider = () => {
     if (!isAnimating) {
       setIsAnimating(true);
       setCurrentSlide(index);
-      setTimeout(() => setIsAnimating(false), 500);
+      setTimeout(() => setIsAnimating(false), 300);
     }
   };
 
   return (
-    <div className="relative w-full h-screen min-h-[600px] overflow-hidden bg-gradient-to-br from-purple-600 to-blue-500 mt-0 ">
+    <div className="relative w-full h-screen min-h-[600px] overflow-hidden bg-gradient-to-br from-blue-600 to-green-500 mt-0 ">
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-white rounded-full filter blur-3xl animate-pulse"></div>
@@ -124,7 +124,7 @@ const Slider = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-2 sm:pt-4 justify-center lg:justify-start">
-                  <button className="px-6 py-3 sm:px-8 sm:py-4 bg-white text-purple-600 rounded-full font-bold text-base sm:text-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+                  <button className="px-6 py-3 sm:px-8 sm:py-4 bg-white text-blue-600 rounded-full font-bold text-base sm:text-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-2xl">
                     Купить сейчас
                   </button>
                   <NavLink to='/about' className="px-6 py-3 sm:px-8 sm:py-4 bg-white/20 backdrop-blur-md text-white rounded-full font-bold text-base sm:text-lg hover:bg-white/30 transform hover:scale-105 transition-all duration-300 border-2 border-white/50">
@@ -154,7 +154,7 @@ const Slider = () => {
                 
                 {/* Floating Elements - Hidden on mobile */}
                 <div className="hidden sm:flex absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-white/20 backdrop-blur-md rounded-full items-center justify-center border border-white/30 animate-bounce">
-                  <Star className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-yellow-300 fill-yellow-300" />
+                  <Star className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-yellow-500 fill-yellow-400" />
                 </div>
               </div>
             </div>

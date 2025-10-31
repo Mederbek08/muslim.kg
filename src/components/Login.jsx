@@ -43,7 +43,7 @@ const Login = () => {
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden transform transition duration-500 hover:shadow-purple-500/50">
         
         {/* Шапка/Предупреждение */}
-        <div className="bg-gradient-to-r from-purple-700 to-blue-600 p-6 flex flex-col items-center">
+        <div className="bg-gradient-to-r from-green-700 to-blue-600 p-6 flex flex-col items-center">
           <Lock className="w-10 h-10 text-white mb-2" />
           <h2 className="text-3xl font-extrabold text-white">Вход для Администратора</h2>
           <p className="text-white/80 text-sm mt-1">Доступ разрешен только персоналу.</p>
@@ -68,7 +68,7 @@ const Login = () => {
             <input
               type="email"
               placeholder="Email Администратора"
-              className="w-full border border-gray-300 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-shadow duration-300"
+              className="w-full border border-gray-300 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-green-500 transition-shadow duration-300"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -81,7 +81,7 @@ const Login = () => {
             <input
               type="password"
               placeholder="Пароль"
-              className="w-full border border-gray-300 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-shadow duration-300"
+              className="w-full border border-gray-300 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-green-500 transition-shadow duration-300"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -95,10 +95,10 @@ const Login = () => {
           {/* Кнопка входа */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 
+            className="w-full bg-gradient-to-r from-green-600 to-blue-500 hover:from-green-700 hover:to-blue-600 
                        text-white py-3 rounded-xl font-bold text-lg 
                        shadow-md shadow-purple-500/50 transition duration-300 
-                       transform hover:scale-[1.01] active:scale-[0.99] focus:outline-none focus:ring-4 ring-purple-300"
+                       transform hover:scale-[1.01] active:scale-[0.99] focus:outline-none focus:ring-4 ring-green-300"
           >
             Войти в Панель
           </button>

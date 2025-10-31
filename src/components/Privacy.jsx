@@ -56,7 +56,7 @@ const PrivacyPolicy = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-blue-500 p-4 md:p-8 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-green-500 to-blue-500 p-4 md:p-8 relative overflow-hidden">
       
       {/* Анимированный фоновый паттерн - Уменьшены размеры для лучшей адаптивности на мобильных */}
       <div className="absolute inset-0 opacity-10">
@@ -93,7 +93,7 @@ const PrivacyPolicy = () => {
         }`} style={{ transitionDelay: '400ms' }}>
           
           {/* Введение - Адаптация padding и шрифта */}
-          <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6 md:p-8 text-white relative overflow-hidden">
+          <div className="bg-gradient-to-r from-green-600 to-blue-600 p-6 md:p-8 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-20 h-20 md:w-40 md:h-40 bg-white/10 rounded-full blur-2xl animate-pulse"></div>
             <h2 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 relative z-10">Введение</h2>
             <p className="text-white/90 text-sm md:text-base leading-relaxed relative z-10">
@@ -117,17 +117,17 @@ const PrivacyPolicy = () => {
               >
                 <button
                   onClick={() => toggleSection(index)}
-                  className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 transition-all duration-300 group"
+                  className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-gradient-to-r hover:from-green-50 hover:to-blue-50 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-3 md:gap-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg md:rounded-xl flex items-center justify-center text-white transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-lg flex-shrink-0">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg md:rounded-xl flex items-center justify-center text-white transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-lg flex-shrink-0">
                       {section.icon}
                     </div>
-                    <h3 className="text-base md:text-xl font-bold text-gray-800 text-left group-hover:text-purple-600 transition-colors duration-300">
+                    <h3 className="text-base md:text-xl font-bold text-gray-800 text-left group-hover:text-green-600 transition-colors duration-300">
                       {section.title}
                     </h3>
                   </div>
-                  <div className="text-purple-600 transform transition-transform duration-300 group-hover:scale-125 flex-shrink-0 ml-2">
+                  <div className="text-green-600 transform transition-transform duration-300 group-hover:scale-125 flex-shrink-0 ml-2">
                     {expandedSection === index ? (
                       <ChevronUp className="w-5 h-5 md:w-6 md:h-6" />
                     ) : (
@@ -155,7 +155,7 @@ const PrivacyPolicy = () => {
             <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">Дополнительная информация</h3>
             <div className="space-y-3 md:space-y-4 text-gray-700 text-sm md:text-base">
               <p className="leading-relaxed">
-                <span className="font-semibold text-purple-600">Срок хранения данных:</span> Мы храним ваши персональные данные 
+                <span className="font-semibold text-green-600">Срок хранения данных:</span> Мы храним ваши персональные данные 
                 только в течение необходимого периода для выполнения целей, указанных в данной политике, 
                 или в соответствии с требованиями законодательства.
               </p>
@@ -165,7 +165,7 @@ const PrivacyPolicy = () => {
                 предоставил нам персональные данные, пожалуйста, свяжитесь с нами.
               </p>
               <p className="leading-relaxed">
-                <span className="font-semibold text-purple-600">Изменения в политике:</span> Мы можем обновлять данную политику 
+                <span className="font-semibold text-green-600">Изменения в политике:</span> Мы можем обновлять данную политику 
                 конфиденциальности время от времени. Существенные изменения будут доведены до вашего сведения 
                 через уведомления на сайте или по электронной почте.
               </p>
@@ -178,7 +178,7 @@ const PrivacyPolicy = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`} style={{ transitionDelay: '1200ms' }}>
           <div className="flex flex-col md:flex-row items-start gap-4">
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg md:rounded-xl flex items-center justify-center text-white flex-shrink-0 animate-pulse">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg md:rounded-xl flex items-center justify-center text-white flex-shrink-0 animate-pulse">
               <FileText className="w-5 h-5 md:w-6 md:h-6" />
             </div>
             <div>
@@ -188,9 +188,9 @@ const PrivacyPolicy = () => {
                 ваши персональные данные, пожалуйста, свяжитесь с нами:
               </p>
               <div className="space-y-2 text-gray-700 text-sm md:text-base">
-                <p className="hover:text-purple-600 transition-colors duration-300"><span className="font-semibold">Email:</span> privacy@muslim-kg.com</p>
-                <p className="hover:text-purple-600 transition-colors duration-300"><span className="font-semibold">Телефон:</span> +996 XXX XXX XXX</p>
-                <p className="hover:text-purple-600 transition-colors duration-300"><span className="font-semibold">Адрес:</span> Кыргызская Республика, г. Бишкек</p>
+                <p className="hover:text--green-600 transition-colors duration-300"><span className="font-semibold">Email:</span> mederbekrahmatullaev7@gmail.com</p>
+                <p className="hover:text-green-600 transition-colors duration-300"><span className="font-semibold">Телефон:</span> +996 999 050 207</p>
+                <p className="hover:text-green-600 transition-colors duration-300"><span className="font-semibold">Адрес:</span> Кыргызская Республика, г. Бишкек</p>
               </div>
             </div>
           </div>

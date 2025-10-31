@@ -12,27 +12,27 @@ const AboutUsHero = () => {
           <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
             
             {/* Логотип 'M' */}
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
               <span className="text-white text-2xl font-extrabold">M</span>
             </div>
             
             {/* Название Компании */}
-            <span className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent tracking-wider">
+            <span className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent tracking-wider">
                 Muslim_kg
             </span>
           </div>
         </div>
         
         {/* Основной Контент */}
-        <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 text-center md:text-left">
+        <h1 className="text-4xl sm:text-5xl text-black/90 font-extrabold mb-4 text-center md:text-left">
           О нас
         </h1>
         
-        <p className="text-lg sm:text-xl max-w-4xl text-white/90 leading-relaxed text-center md:text-left">
+        <p className="text-lg sm:text-xl max-w-4xl text-black/90 leading-relaxed text-center md:text-left">
           **Muslim\_kg** — это ваш надежный партнер в Кыргызстане, предлагающий широкий ассортимент высококачественных товаров. Мы стремимся предоставлять нашим клиентам только лучшие продукты, сочетая традиции и современные стандарты качества.
         </p>
 
-        <p className="mt-4 text-lg sm:text-xl max-w-4xl text-white/90 leading-relaxed font-semibold text-center md:text-left">
+        <p className="mt-4 text-lg sm:text-xl max-w-4xl text-black/90 leading-relaxed font-semibold text-center md:text-left">
           Да, **мы продаем всякие товары**, но делаем это с особым вниманием к деталям и потребностям нашей аудитории. Наша цель — стать вашим первым выбором!
         </p>
       </div>

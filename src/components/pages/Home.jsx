@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Header from '../components/layout/Header';
-import Footer from '../components/Footer';
-import Slider from '../components/Slider';
-import Cards from '../components/Cards';
+import Header from '../layout/Header';
+import Footer from '../Footer';
+import Slider from '../Slider';
+import Cards from '../Cards';
 
 function Home() {
   
