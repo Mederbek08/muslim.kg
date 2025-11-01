@@ -133,7 +133,7 @@ export const CustomCursor = ({ isLoading = false }) => {
           // Курсор загрузки (вращающийся)
           <div 
             style={loadingCursorStyle} 
-            className={`${baseClass} w-8 h-8 border-4 border-t-transparent border-white loading-cursor-spin`} 
+            className={`${baseClass} w-2 h-2 border-4 border-t-transparent border-white loading-cursor-spin`} 
           />
       );
   }
@@ -143,13 +143,13 @@ export const CustomCursor = ({ isLoading = false }) => {
       {/* 1. Курсор для ССЫЛКИ (Link/Hover Cursor) */}
       <div 
         style={linkCursorStyle} 
-        className={`${baseClass} w-4 h-4 bg-red-500 mix-blend-difference`} 
+        className={`${baseClass} w-2 h-2 bg-green-300 mix-blend-difference`} 
       />
 
       {/* 2. ОСНОВНОЙ КУРСОР (Main Cursor) */}
       <div 
         style={mainCursorStyle} 
-        className={`${baseClass} w-5 h-5 bg-gradient-to-r from-green-500 to-blue-500`} 
+        className={`${baseClass} w-2 h-2 bg-gradient-to-r from-green-300 to-blue-300`} 
       />
     </>
   );
