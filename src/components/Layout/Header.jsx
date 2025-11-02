@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { RiMenu5Fill, RiCloseLine } from "react-icons/ri";
 import { BsBarChartLine } from "react-icons/bs";
 import { User, ShoppingCart, Search } from "lucide-react";
-import { useCart } from "../../components/CartContext";
+import { useCart } from "../CartContext";
 import { NavLink } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";

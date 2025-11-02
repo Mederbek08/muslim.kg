@@ -171,7 +171,7 @@ const CartModal = () => {
           <div className="border-t border-gray-200 p-4 space-y-3 bg-gray-50">
             <button
               onClick={clearCart}
-              className="w-full text-red-600 hover:bg-red-50 py-2 rounded-lg font-semibold transition-colors border border-red-200"
+              className="w-full text-red-600 hover:bg-red-50 py-2 rounded-lg font-semibold transition-colors border border-pink-500 hover:border-red-600 hover:text-red-6n00"
             >
               Очистить корзину
             </button>
@@ -185,7 +185,7 @@ const CartModal = () => {
 
             <button
               onClick={handleCheckout}
-              className="w-full bg-gradient-to-r from-green-600 to-blue-500 text-white py-4 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-blue-600 transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-95"
+              className="w-full bg-gradient-to-r from-green-600 to-blue-500 text-white py-4 rounded-xl font-bold text-lg hover:from-green-700 hover:to-blue-600 transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-95"
             >
               Оформить заказ (в WhatsApp)
             </button>

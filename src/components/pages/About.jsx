@@ -6,7 +6,7 @@ import MissionVision from '../MissionVision';
 import OurValues from '../OurValues'; 
 import CompanyHistory from '../CompanyHistory';
 import Footer from '../Footer';
-import Header from '../Layout/Header';
+import Header from '../layout/Header';
 
 const AboutUsPage = () => {
   return (

@@ -117,7 +117,7 @@ function Footer() {
                 href="https://www.instagram.com/muslim.kgz_?igsh=ZHV1Y2tmdDU1Nzd1&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 transition-transform duration-300 transform hover:scale-125"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-transform duration-300 transform hover:scale-125"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -128,7 +128,7 @@ function Footer() {
                 href="https://t.me/mederbek_7"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-500 transition-transform duration-300 transform hover:scale-125"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-black-500 transition-transform duration-300 transform hover:scale-125"
                 aria-label="Telegram"
               >
                 <Send className="w-5 h-5" />
