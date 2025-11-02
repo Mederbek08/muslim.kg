@@ -225,7 +225,7 @@ const ProductCard = ({ product, index }) => {
         </AnimatePresence>
 
         <div className="p-3 md:p-5 rounded-2xl bg-white flex flex-col space-y-3 h-full">
-          <div className="absolute top-4 right-4 backdrop-blur-sm px-2 md:px-3 py-1 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 shadow-lg z-10">
+          <div className="absolute top-4 right-4 backdrop-blur-sm px-2 md:px-3 py-1 rounded-full bg-gradient-to-r from-green-500 to-blue-500 shadow-lg z-10">
             <span className="text-xs font-bold text-white">{category}</span>
           </div>
 
