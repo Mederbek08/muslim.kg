@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "../../firebase";
-import { motion } from "framer-motion";
 import {
   collection,
   addDoc,
@@ -375,80 +374,69 @@ const Admin = () => {
         <h3 className="text-lg md:text-xl font-bold mb-2">Товарлар</h3>
         {products.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-            {products.map((p, index) => {
+            {products.map((p) => {
               const isNew =
                 (new Date() -
                   new Date(p.createdAt?.seconds * 1000 || Date.now())) /
                   (1000 * 60 * 60 * 24) <
                 7;
-
               return (
-                <motion.div
+                <div
                   key={p.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: index * 0.05,
-                    duration: 0.4,
-                    ease: "easeOut",
-                  }}
-                  className={`group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${
+                  className={`rounded-xl overflow-hidden shadow-md transition-all duration-300 ${
                     darkMode ? "bg-gray-800" : "bg-white"
                   }`}
                 >
+                  {/* Image 
                   {/* Image */}
-                  <div className="relative w-full aspect-[1/1] overflow-hidden">
-                    <img
-                      src={
-                        p.imageUrl ||
-                        "https://via.placeholder.com/400x400?text=No+Image"
-                      }
-                      alt={p.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div className="relative w-full aspect-[1/1] overflow-hidden rounded-t-xl">
+  <img
+    src={
+      p.imageUrl ||
+      "https://via.placeholder.com/400x400?text=No+Image"
+    }
+    alt={p.title}
+    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+  />
+  {isNew && (
+    <span className="absolute top-2 left-2 bg-green-500 text-white px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold shadow">
+      NEW
+    </span>
+  )}
+  <span className="absolute top-2 right-2 px-2 py-0.5 bg-gray-900/70 rounded-full text-[10px] md:text-xs text-white font-semibold shadow">
+    {p.category}
+  </span>
+</div>
 
-                    {/* Category + NEW */}
-                    <div className="absolute top-2 left-2 flex flex-col gap-1">
-                      {isNew && (
-                        <span className="bg-green-500 text-white px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold shadow">
-                          NEW
-                        </span>
-                      )}
-                      <span className="bg-gray-900/80 text-white px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold shadow">
-                        {p.category}
-                      </span>
-                    </div>
-                  </div>
 
                   {/* Info */}
-                  <div className="p-3 flex flex-col gap-2 relative">
+                  <div className="p-3 flex flex-col gap-2">
                     <h3
                       className="text-sm md:text-base font-semibold truncate"
                       title={p.title}
                     >
                       {p.title}
                     </h3>
-
                     <div className="flex justify-between items-center">
-                      <span className="text-indigo-600 dark:text-indigo-400 font-bold text-sm md:text-base">
+                      <span className="text-indigo-600 font-bold text-sm md:text-base">
                         {p.price.toLocaleString()} сом
                       </span>
                       {p.stock > 0 ? (
-                        <span className="px-2 py-0.5 bg-green-100 dark:bg-green-600/40 text-green-700 dark:text-green-300 rounded-full text-[10px] md:text-xs font-semibold">
+                        <span className="px-2 py-0.5 bg-gray-200 dark:bg-gray-700 rounded-full text-xs md:text-sm font-semibold">
                           {p.stock} даана
                         </span>
                       ) : (
-                        <span className="px-2 py-0.5 bg-red-500 text-white rounded-full text-[10px] md:text-xs font-semibold">
+                        <span className="px-2 py-0.5 bg-red-500 text-white rounded-full text-xs md:text-sm font-semibold">
                           Out of stock
                         </span>
                       )}
                     </div>
 
+                    {/* Stock progress */}
                     {p.stock > 0 && (
-                      <div className="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full">
+                      <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
                         <div
-                          className="h-1.5 bg-green-500 rounded-full"
+                          className="h-2 bg-green-500 rounded-full"
                           style={{
                             width: `${Math.min((p.stock / 100) * 100, 100)}%`,
                           }}
@@ -457,22 +445,22 @@ const Admin = () => {
                     )}
 
                     {/* Actions */}
-                    <div className="absolute bottom-3 left-0 w-full flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="flex gap-2 mt-2">
                       <button
                         onClick={() => handleEdit(p)}
-                        className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-full text-xs md:text-sm shadow-md"
+                        className="flex-1 flex items-center justify-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded-lg text-sm md:text-base"
                       >
                         <BsPencil /> Өзгөртүү
                       </button>
                       <button
                         onClick={() => handleDelete(p.id)}
-                        className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-full text-xs md:text-sm shadow-md"
+                        className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-lg text-sm md:text-base"
                       >
-                        <BsTrash /> Өчүрүү
+                        <BsTrash />
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>

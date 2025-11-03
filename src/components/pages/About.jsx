@@ -1,4 +1,4 @@
-// src/components/AboutUsPage.jsx
+
 
 import React from 'react';
 import AboutUsHero from '../AboutUsHero';

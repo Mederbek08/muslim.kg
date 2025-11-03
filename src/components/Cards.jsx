@@ -54,7 +54,7 @@ const formatSom = (amount) => {
 };
 
 // =============================================================
-// --- Product Modal (адаптив) ---
+// --- Product Modal ---
 const ProductModal = ({ product, isOpen, onClose }) => {
   const [quantity, setQuantity] = useState(1);
   const [alert, setAlert] = useState(null);
@@ -115,7 +115,6 @@ const ProductModal = ({ product, isOpen, onClose }) => {
               </button>
 
               <div className="p-4 space-y-4">
-                {/* Сүрөт бөлүгү */}
                 <div className="w-full aspect-square bg-gray-100 rounded-xl overflow-hidden flex items-center justify-center">
                   {imageUrl ? (
                     <img
@@ -128,7 +127,6 @@ const ProductModal = ({ product, isOpen, onClose }) => {
                   )}
                 </div>
 
-                {/* Маалымат бөлүгү */}
                 <h2 className="text-xl font-bold text-gray-800">{title}</h2>
                 <p className="text-gray-600 text-sm">
                   {description || "Описание недоступно"}
@@ -147,7 +145,6 @@ const ProductModal = ({ product, isOpen, onClose }) => {
                   </span>
                 </div>
 
-                {/* Количество жана кнопка */}
                 {stock > 0 && (
                   <div className="flex items-center justify-between space-x-4">
                     <div className="flex items-center space-x-2 bg-gray-100 rounded-xl p-2">
@@ -225,13 +222,17 @@ const ProductCard = ({ product, index }) => {
         </AnimatePresence>
 
         <div className="p-3 md:p-5 rounded-2xl bg-white flex flex-col space-y-3 h-full">
-          <div className="absolute top-4 right-4 backdrop-blur-sm px-2 md:px-3 py-1 rounded-full bg-gradient-to-r from-green-500 to-blue-500 shadow-lg z-10">
-            <span className="text-xs font-bold text-white">{category}</span>
+          {/* Категория карточканын жогорку оң бурчунда */}
+          <div className="absolute top-3 right-3 px-2 md:px-3 py-1 rounded-full bg-gradient-to-r from-green-500 to-blue-500 shadow-lg z-10">
+            <span className="text-xs md:text-sm font-bold text-white">
+              {category}
+            </span>
           </div>
 
+          {/* Сүрөт толук көрүнөт */}
           <motion.div
             whileHover={{ scale: 1.03 }}
-            className="w-full aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden mb-2 relative shadow-md flex items-center justify-center"
+            className="w-full aspect-square rounded-xl overflow-hidden relative shadow-md flex items-center justify-center bg-gray-100"
           >
             {imageUrl ? (
               <img
@@ -324,6 +325,7 @@ const Cards = ({ searchTerm, categoryFilter, onCategorySelect }) => {
     categoryFilter === "" || categoryFilter === "Все товары"
       ? products
       : products.filter((p) => p.category === categoryFilter);
+
   const finalFilteredProducts = filteredByCategory.filter((p) => {
     if (!searchTerm) return true;
     const searchLower = searchTerm.toLowerCase();
@@ -332,6 +334,7 @@ const Cards = ({ searchTerm, categoryFilter, onCategorySelect }) => {
       (p.category && p.category.toLowerCase().includes(searchLower))
     );
   });
+
   const categories = [
     "Все товары",
     ...new Set(products.map((p) => p.category)),

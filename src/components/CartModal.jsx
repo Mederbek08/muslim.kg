@@ -3,7 +3,6 @@ import React from 'react';
 import { X, Plus, Minus, Trash2, ShoppingBag, Package } from 'lucide-react';
 import { useCart } from './CartContext';
 
-// ❗️ Сиздин WhatsApp номериңиз (эл аралык форматсыз +)
 const YOUR_WHATSAPP_NUMBER = '996999050207';
 
 const CartModal = () => {
@@ -28,29 +27,24 @@ const CartModal = () => {
     }).format(amount).replace('KGS', 'сом');
   };
 
-  // WhatsAppка заказ жөнөтүүчү функция
+  // WhatsAppка жөнөтүүчү функция
   const handleCheckout = () => {
     if (cartItems.length === 0) return;
 
     const itemsList = cartItems.map((item, index) => {
       const title = item.title;
-      const category = item.category || '';
+      const category = item.category || 'Без категории';
       const quantity = item.quantity;
       const priceTotal = formatPrice(item.price * item.quantity);
-      const priceOne = formatPrice(item.price);
-      const imageLine = item.imageUrl ? `📷 ${item.imageUrl}` : '';
-      return `${index + 1}. ${title} (${category}) x ${quantity} = ${priceTotal}${imageLine}`;
+
+      return `🛒 ${index + 1}. ${title} | 📦 ${category} | 🔢 ${quantity} | 💰 ${priceTotal}`;
     }).join('%0A');
 
-    const messageHeader = 'Новый заказ с сайта!';
-    const messageFooter = `Итого к оплате: ${formatPrice(getTotalPrice())} Прошу подтвердить наличие и детали заказа.`;
+    const fullMessage = `    📝📝📝 Новый заказ с сайта:📝📝📝%0A${itemsList}%0A%0A💳 Итого к оплате: ${formatPrice(getTotalPrice())}%0A✅ Прошу подтвердить наличие и детали заказа.`;
 
-    const fullMessage = messageHeader + itemsList + messageFooter;
-
-    const whatsappLink = `https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${encodeURIComponent(fullMessage)}`;
+    const whatsappLink = `https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${fullMessage}`;
     window.open(whatsappLink, '_blank');
     setIsCartOpen(false);
-    // clearCart(); // эгер заказ жибергенден кийин корзинаны тазалоо керек болсо комментарийди алып салыңыз
   };
 
   return (
@@ -116,11 +110,11 @@ const CartModal = () => {
                   <h3 className="font-bold text-gray-800 text-sm mb-1 line-clamp-2">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-gray-500 mb-2">{item.category}</p>
+                  <p className="text-xs text-gray-500 mb-2">{item.category || 'Без категории'}</p>
                   
                   <div className="flex items-center justify-between mt-auto">
                     {/* Quantity Controls */}
-                    <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-300  p-0.5">
+                    <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-300 p-0.5">
                       <button
                         onClick={() => decreaseQuantity(item.id)}
                         className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
@@ -171,7 +165,7 @@ const CartModal = () => {
           <div className="border-t border-gray-200 p-4 space-y-3 bg-gray-50">
             <button
               onClick={clearCart}
-              className="w-full text-red-600 hover:bg-red-50 py-2 rounded-lg font-semibold transition-colors border border-pink-500 hover:border-red-600 hover:text-red-6n00"
+              className="w-full text-red-600 hover:bg-red-50 py-2 rounded-lg font-semibold transition-colors border border-pink-500 hover:border-red-600 hover:text-red-600"
             >
               Очистить корзину
             </button>
@@ -194,30 +188,10 @@ const CartModal = () => {
       </div>
 
       <style>{`
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(100%);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        .animate-slideInRight {
-          animation: slideInRight 0.3s ease-out;
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.2s ease-out;
-        }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .animate-slideInRight { animation: slideInRight 0.3s ease-out; }
+        .animate-fadeIn { animation: fadeIn 0.2s ease-out; }
       `}</style>
     </>
   );
