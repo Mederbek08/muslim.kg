@@ -37,10 +37,10 @@ const CartModal = () => {
       const quantity = item.quantity;
       const priceTotal = formatPrice(item.price * item.quantity);
 
-      return `🛒 ${index + 1}. ${title} | 📦 ${category} | 🔢 ${quantity} | 💰 ${priceTotal}`;
+      return `🛒 ${index + 1}. ${title} | 📦 ${category} | 🔢 ${quantity} шт | 💰 ${priceTotal}`;
     }).join('%0A');
 
-    const fullMessage = `    📝📝📝 Новый заказ с сайта:📝📝📝%0A${itemsList}%0A%0A💳 Итого к оплате: ${formatPrice(getTotalPrice())}%0A✅ Прошу подтвердить наличие и детали заказа.`;
+    const fullMessage = `📝 Новый заказ с сайта:%0A${itemsList}%0A%0A💳 Итого к оплате: ${formatPrice(getTotalPrice())}%0A✅ Прошу подтвердить наличие и детали заказа.`;
 
     const whatsappLink = `https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${fullMessage}`;
     window.open(whatsappLink, '_blank');
