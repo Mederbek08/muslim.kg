@@ -1,46 +1,56 @@
 import React, { useState, useEffect, useRef } from "react";
 
-// 🎨 Custom CSS — ак фонго ылайыктуу
+// CSS
 const CUSTOM_CURSOR_STYLES = `
-  body {
-    cursor: none !important;
-  }
+body { cursor: none !important; }
 
-  @keyframes fadeOut {
-    0% { opacity: 0.8; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.6); }
-  }
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 8px rgba(0,150,255,0.4), 0 0 16px rgba(0,100,200,0.2);}
+  50% { box-shadow:0 0 20px rgba(0,150,255,0.8),0 0 40px rgba(0,100,200,0.5);}
+  100% { box-shadow:0 0 8px rgba(0,150,255,0.4),0 0 16px rgba(0,100,200,0.2);}
+}
 
-  .cursor-trail-line {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    height: 2px;
-    background: linear-gradient(90deg, rgba(0,255,255,0.8), rgba(0,255,180,0));
-    border-radius: 2px;
-    opacity: 0.6;
-    animation: fadeOut 0.8s linear forwards;
-  }
+.cursor-pulse { animation: pulseGlow 2.2s ease-in-out infinite; }
+.cursor-glow {
+  filter: drop-shadow(0 0 8px rgba(0,150,255,0.6)) drop-shadow(0 0 16px rgba(0,100,200,0.4));
+}
 
-  .cursor-glow {
-    filter: drop-shadow(0 0 8px rgba(0,255,255,0.8))
-            drop-shadow(0 0 18px rgba(0,255,150,0.8));
-  }
+.cursor-particle {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(0,180,255,1) 0%, rgba(0,100,200,0) 80%);
+  opacity: 0.8;
+  z-index: 9998;
+  transition: all 0.8s ease-out;
+}
+
+.cursor-trail {
+  position: fixed;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0,180,255,0.6), rgba(0,100,200,0));
+  border-radius: 2px;
+  z-index: 9997;
+  transition: all 0.8s ease-out;
+}
 `;
 
-const useMousePosition = () => {
-  const [pos, setPos] = useState({ x: 0, y: 0 });
+const useMouse = () => {
+  const [pos, setPos] = useState({ x:0, y:0 });
   const [hover, setHover] = useState(false);
   const [click, setClick] = useState(false);
 
-  useEffect(() => {
-    const move = (e) => setPos({ x: e.clientX, y: e.clientY });
-    const down = () => setClick(true);
-    const up = () => setClick(false);
-    const over = (e) => {
-      if (e.target.closest("a") || e.target.closest("button") || e.target.classList.contains("link-hover")) {
+  useEffect(()=>{
+    const move = e=>setPos({x:e.clientX,y:e.clientY});
+    const down=()=>setClick(true);
+    const up=()=>setClick(false);
+    const over=e=>{
+      if(e.target.closest("a")||e.target.closest("button")||e.target.classList.contains("link-hover"))
         setHover(true);
-      } else setHover(false);
+      else setHover(false);
     };
 
     window.addEventListener("mousemove", move);
@@ -48,7 +58,7 @@ const useMousePosition = () => {
     window.addEventListener("mouseup", up);
     window.addEventListener("mouseover", over);
 
-    return () => {
+    return ()=>{
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mousedown", down);
       window.removeEventListener("mouseup", up);
@@ -56,98 +66,106 @@ const useMousePosition = () => {
     };
   }, []);
 
-  return { pos, hover, click };
+  return {pos, hover, click};
 };
 
-const CustomCursor = ({ isLoading = false }) => {
-  const { pos, hover, click } = useMousePosition();
-  const [trailLines, setTrailLines] = useState([]);
+const CustomCursor = () => {
+  const {pos, hover, click} = useMouse();
+  const [particles, setParticles] = useState([]);
+  const [trail, setTrail] = useState([]);
   const lastPos = useRef(pos);
 
   // CSS кошуу
-  useEffect(() => {
+  useEffect(()=>{
     const s = document.createElement("style");
     s.innerHTML = CUSTOM_CURSOR_STYLES;
     document.head.appendChild(s);
-    return () => document.head.removeChild(s);
-  }, []);
+    return ()=>document.head.removeChild(s);
+  },[]);
 
-  // 🚀 Trail линия түзүү
-  useEffect(() => {
-    if (!lastPos.current.x || !lastPos.current.y) {
-      lastPos.current = pos;
-      return;
-    }
-
+  // Particle жана trail генерация
+  useEffect(()=>{
     const dx = pos.x - lastPos.current.x;
     const dy = pos.y - lastPos.current.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
+    const distance = Math.sqrt(dx*dx + dy*dy);
 
-    if (distance > 4) {
-      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-      const newLine = {
+    if(distance > 2){
+      // Particle: көк нуручалар
+      for(let i=0;i<3;i++){
+        const p = {
+          id: Date.now()+Math.random(),
+          x:lastPos.current.x,
+          y:lastPos.current.y,
+          dx:(Math.random()-0.5)*3,
+          dy:(Math.random()-0.5)*3
+        };
+        setParticles(prev=>[...prev.slice(-120), p]);
+      }
+
+      // Trail линия: түтүн сыяктуу узак
+      const t = {
         id: Date.now(),
-        x: lastPos.current.x,
-        y: lastPos.current.y,
-        width: distance,
-        rotation: angle,
+        x1:lastPos.current.x,
+        y1:lastPos.current.y,
+        x2:pos.x,
+        y2:pos.y
       };
+      setTrail(prev=>[...prev.slice(-50), t]);
 
-      setTrailLines((prev) => [...prev.slice(-15), newLine]);
       lastPos.current = pos;
     }
 
-    const timer = setTimeout(() => {
-      setTrailLines((prev) => prev.slice(1));
-    }, 1000);
+    // Particle’лерди кыймылдатуу жана акырында жоготуу
+    const interval = setInterval(()=>{
+      setParticles(prev=>prev.map(p=>({ ...p, x:p.x+p.dx, y:p.y+p.dy })));
+      setParticles(prev=>prev.filter(p=>Date.now()-p.id<800));
+      setTrail(prev=>prev.filter(t=>Date.now()-t.id<800));
+    },16);
 
-    return () => clearTimeout(timer);
-  }, [pos]);
-
-  if (isLoading) {
-    return (
-      <div
-        className="fixed z-[9999] border-4 border-t-transparent border-white rounded-full"
-        style={{
-          width: 20,
-          height: 20,
-          left: pos.x,
-          top: pos.y,
-          transform: "translate(-50%, -50%) rotate(0deg)",
-        }}
-      />
-    );
-  }
+    return ()=>clearInterval(interval);
+  },[pos]);
 
   return (
     <>
-      {trailLines.map((line) => (
+      {/* Trail сызык (түтүндөй) */}
+      {trail.map(line=>(
         <div
           key={line.id}
-          className="cursor-trail-line"
+          className="cursor-trail"
           style={{
-            left: `${line.x}px`,
-            top: `${line.y}px`,
-            width: `${line.width}px`,
-            transform: `rotate(${line.rotation}deg)`,
+            left:`${Math.min(line.x1,line.x2)}px`,
+            top:`${Math.min(line.y1,line.y2)}px`,
+            width:`${Math.max(Math.abs(line.x2-line.x1),1)}px`,
+            transform:`rotate(${Math.atan2(line.y2-line.y1,line.x2-line.x1)*180/Math.PI}deg)`,
+            opacity:0.5
           }}
         />
       ))}
 
+      {/* Particle’лер (көк нурчалар) */}
+      {particles.map(p=>(
+        <div
+          key={p.id}
+          className="cursor-particle"
+          style={{ left:`${p.x}px`, top:`${p.y}px`, opacity:0.8 }}
+        />
+      ))}
+
+      {/* Main Cursor (ток, караңгы) */}
       <div
-        className={`fixed rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2 z-[9999] cursor-glow transition-all duration-150 ease-out`}
+        className={`fixed rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2 z-[9999] cursor-glow cursor-pulse transition-all duration-150 ease-out`}
         style={{
-          left: `${pos.x}px`,
-          top: `${pos.y}px`,
-          width: hover ? 26 : 18,
-          height: hover ? 26 : 18,
+          left:`${pos.x}px`,
+          top:`${pos.y}px`,
+          width:hover?24:16,
+          height:hover?24:16,
           background: click
-            ? "radial-gradient(circle, #00f5d4 0%, #00bbf9 100%)"
-            : "linear-gradient(135deg, #00f5d4, #00bbf9)",
-          opacity: hover ? 0.8 : 1,
-          boxShadow: click
-            ? "0 0 25px 5px rgba(0,255,200,0.6)"
-            : "0 0 15px 4px rgba(0,255,255,0.4)",
+            ?"radial-gradient(circle,#0055ff 0%,#0033aa 100%)"
+            :"linear-gradient(135deg,#0044cc,#002288)",
+          opacity:hover?0.9:1,
+          transform:click
+            ?"translate(-50%,-50%) scale(0.8)"
+            :"translate(-50%,-50%) scale(1)"
         }}
       />
     </>
