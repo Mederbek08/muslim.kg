@@ -222,11 +222,14 @@ const ProductCard = ({ product, index }) => {
         </AnimatePresence>
 
         <div className="p-3 md:p-5 rounded-2xl bg-white flex flex-col space-y-3 h-full">
-          {/* Категория карточканын жогорку оң бурчунда */}
-          <div className="absolute top-3 right-3 px-2 md:px-3 py-1 rounded-full bg-gradient-to-r from-green-500 to-blue-500 shadow-lg z-10">
-            <span className="text-xs md:text-sm font-bold text-white">
-              {category}
-            </span>
+          
+          {/* ✅ Категория — сүрөттүн жогорку оң бурчунда, кичине жана таза */}
+          <div className="absolute top-2 right-2 md:top-3 md:right-3 z-20">
+            <div className="px-2 py-0.5 md:px-2.5 md:py-1 rounded-full bg-gradient-to-r from-green-600 to-blue-600 shadow-md">
+              <span className="text-[10px] md:text-xs font-semibold text-white">
+                {category}
+              </span>
+            </div>
           </div>
 
           {/* Сүрөт толук көрүнөт */}
@@ -292,6 +295,7 @@ const ProductCard = ({ product, index }) => {
     </>
   );
 };
+
 
 // =============================================================
 // --- Cards Component ---

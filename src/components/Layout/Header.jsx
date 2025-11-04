@@ -56,11 +56,12 @@ const Header = ({ onSearch, onCategorySelect }) => {
     <>
       {/* === HEADER === */}
       <header
-        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 backdrop-blur-md shadow-md ${
-          scrolled ? "bg-white/90" : "bg-transparent"
-        }`}
-        data-aos="fade-down"
-      >
+  className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 backdrop-blur-md shadow-md ${
+    scrolled ? "bg-white/90" : "bg-white"
+  }`}
+  data-aos="fade-down"
+>
+
         <div
           className="max-w-[1800px] mx-auto flex justify-between items-center px-4 sm:px-6 py-3 md:py-4"
           data-aos="fade-down"

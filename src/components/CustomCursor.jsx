@@ -1,155 +1,154 @@
+import React, { useState, useEffect, useRef } from "react";
 
-
-import React, { useState, useEffect, useRef } from 'react';
-
-// --- A. Встроенные CSS-стили и Анимация ---
-// ВНИМАНИЕ: Стили body{cursor: none} должны быть добавлены в ваш глобальный CSS.
+// 🎨 Custom CSS — ак фонго ылайыктуу
 const CUSTOM_CURSOR_STYLES = `
-  /* * Добавьте в ваш глобальный CSS (например, index.css):
-   * body { cursor: none !important; }
-   */
-  
-  /* Анимация вращения для курсора загрузки */
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  body {
+    cursor: none !important;
   }
 
-  .loading-cursor-spin {
-    animation: spin 1s linear infinite;
+  @keyframes fadeOut {
+    0% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.6); }
+  }
+
+  .cursor-trail-line {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(0,255,255,0.8), rgba(0,255,180,0));
+    border-radius: 2px;
+    opacity: 0.6;
+    animation: fadeOut 0.8s linear forwards;
+  }
+
+  .cursor-glow {
+    filter: drop-shadow(0 0 8px rgba(0,255,255,0.8))
+            drop-shadow(0 0 18px rgba(0,255,150,0.8));
   }
 `;
 
-// --- B. Хук для отслеживания мыши ---
 const useMousePosition = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isHoveringLink, setIsHoveringLink] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
-  const mouse = useRef({ x: 0, y: 0 });
-  const frame = useRef();
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [hover, setHover] = useState(false);
+  const [click, setClick] = useState(false);
 
   useEffect(() => {
-    const updateMouse = (e) => {
-      mouse.current = { x: e.clientX, y: e.clientY };
-      if (!frame.current) {
-        frame.current = requestAnimationFrame(() => {
-          setPosition(mouse.current);
-          frame.current = null;
-        });
-      }
+    const move = (e) => setPos({ x: e.clientX, y: e.clientY });
+    const down = () => setClick(true);
+    const up = () => setClick(false);
+    const over = (e) => {
+      if (e.target.closest("a") || e.target.closest("button") || e.target.classList.contains("link-hover")) {
+        setHover(true);
+      } else setHover(false);
     };
 
-    const handleLinkHover = (e) => {
-      // Проверяем, наведен ли курсор на элемент с классом 'link-hover'
-      // или на стандартные интерактивные элементы.
-      if (e.target.closest('.link-hover') || e.target.closest('a') || e.target.closest('button')) {
-        setIsHoveringLink(true);
-      } else {
-        setIsHoveringLink(false);
-      }
-    };
-
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
-
-    window.addEventListener('mousemove', updateMouse);
-    window.addEventListener('mouseover', handleLinkHover); 
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mousedown", down);
+    window.addEventListener("mouseup", up);
+    window.addEventListener("mouseover", over);
 
     return () => {
-      window.removeEventListener('mousemove', updateMouse);
-      window.removeEventListener('mouseover', handleLinkHover);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-      if (frame.current) cancelAnimationFrame(frame.current);
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mousedown", down);
+      window.removeEventListener("mouseup", up);
+      window.removeEventListener("mouseover", over);
     };
   }, []);
 
-  return { position, isHoveringLink, isClicking };
+  return { pos, hover, click };
 };
 
-// --- C. Компонент CustomCursor (для импорта) ---
-export const CustomCursor = ({ isLoading = false }) => {
-  const { position, isHoveringLink, isClicking } = useMousePosition();
-  
-  // Добавляем встроенные стили (чтобы не просить пользователя добавлять их вручную)
+const CustomCursor = ({ isLoading = false }) => {
+  const { pos, hover, click } = useMousePosition();
+  const [trailLines, setTrailLines] = useState([]);
+  const lastPos = useRef(pos);
+
+  // CSS кошуу
   useEffect(() => {
-    const styleEl = document.createElement('style');
-    styleEl.innerHTML = CUSTOM_CURSOR_STYLES;
-    document.head.appendChild(styleEl);
-    
-    // Очистка при размонтировании
-    return () => {
-      document.head.removeChild(styleEl);
-    };
+    const s = document.createElement("style");
+    s.innerHTML = CUSTOM_CURSOR_STYLES;
+    document.head.appendChild(s);
+    return () => document.head.removeChild(s);
   }, []);
 
+  // 🚀 Trail линия түзүү
+  useEffect(() => {
+    if (!lastPos.current.x || !lastPos.current.y) {
+      lastPos.current = pos;
+      return;
+    }
 
-  const baseClass = 'fixed rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2 z-[9999] transition-all duration-100 ease-out';
-  
-  // 1. Курсор для ССЫЛКИ (Link Cursor)
-  const linkCursorStyle = {
-    left: `${position.x}px`,
-    top: `${position.y}px`,
-    // Увеличение при наведении на ссылку/кнопку
-    transform: isHoveringLink 
-      ? `translate(-50%, -50%) scale(4)` 
-      : `translate(-50%, -50%) scale(0)`, 
-    transitionDuration: '200ms',
-  };
-  
-  // 2. ОСНОВНОЙ КУРСОР (Main Cursor)
-  const mainCursorStyle = {
-    left: `${position.x}px`,
-    top: `${position.y}px`,
-    // Эффект нажатия: уменьшаем масштаб
-    transform: isClicking 
-      ? 'translate(-50%, -50%) scale(0.6)' 
-      : 'translate(-50%, -50%) scale(1)',
-    transitionDuration: '150ms',
-    // При наведении на ссылку, основной курсор уменьшается и становится менее заметным
-    opacity: isHoveringLink ? 0.2 : 0.8,
-  };
+    const dx = pos.x - lastPos.current.x;
+    const dy = pos.y - lastPos.current.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-  // 3. Курсор для ЗАГРУЗКИ (Loading Cursor)
-  const loadingCursorStyle = {
-    left: `${position.x}px`,
-    top: `${position.y}px`,
-    // Показываем только при isLoading === true
-    transform: isLoading 
-      ? `translate(-50%, -50%) scale(5)` 
-      : `translate(-50%, -50%) scale(0)`, 
-    transitionDuration: '300ms',
-  };
+    if (distance > 4) {
+      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+      const newLine = {
+        id: Date.now(),
+        x: lastPos.current.x,
+        y: lastPos.current.y,
+        width: distance,
+        rotation: angle,
+      };
 
-  // Если идет загрузка, скрываем все, кроме курсора загрузки
+      setTrailLines((prev) => [...prev.slice(-15), newLine]);
+      lastPos.current = pos;
+    }
+
+    const timer = setTimeout(() => {
+      setTrailLines((prev) => prev.slice(1));
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [pos]);
+
   if (isLoading) {
-      return (
-          // Курсор загрузки (вращающийся)
-          <div 
-            style={loadingCursorStyle} 
-            className={`${baseClass} w-2 h-2 border-4 border-t-transparent border-white loading-cursor-spin`} 
-          />
-      );
+    return (
+      <div
+        className="fixed z-[9999] border-4 border-t-transparent border-white rounded-full"
+        style={{
+          width: 20,
+          height: 20,
+          left: pos.x,
+          top: pos.y,
+          transform: "translate(-50%, -50%) rotate(0deg)",
+        }}
+      />
+    );
   }
 
   return (
     <>
-      {/* 1. Курсор для ССЫЛКИ (Link/Hover Cursor) */}
-      <div 
-        style={linkCursorStyle} 
-        className={`${baseClass} w-2 h-2 bg-green-300 mix-blend-difference`} 
-      />
+      {trailLines.map((line) => (
+        <div
+          key={line.id}
+          className="cursor-trail-line"
+          style={{
+            left: `${line.x}px`,
+            top: `${line.y}px`,
+            width: `${line.width}px`,
+            transform: `rotate(${line.rotation}deg)`,
+          }}
+        />
+      ))}
 
-      {/* 2. ОСНОВНОЙ КУРСОР (Main Cursor) */}
-      <div 
-        style={mainCursorStyle} 
-        className={`${baseClass} w-2 h-2 bg-gradient-to-r from-green-300 to-blue-300`} 
+      <div
+        className={`fixed rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2 z-[9999] cursor-glow transition-all duration-150 ease-out`}
+        style={{
+          left: `${pos.x}px`,
+          top: `${pos.y}px`,
+          width: hover ? 26 : 18,
+          height: hover ? 26 : 18,
+          background: click
+            ? "radial-gradient(circle, #00f5d4 0%, #00bbf9 100%)"
+            : "linear-gradient(135deg, #00f5d4, #00bbf9)",
+          opacity: hover ? 0.8 : 1,
+          boxShadow: click
+            ? "0 0 25px 5px rgba(0,255,200,0.6)"
+            : "0 0 15px 4px rgba(0,255,255,0.4)",
+        }}
       />
     </>
   );

@@ -22,27 +22,26 @@ function Home() {
   };
 
   return (
-    <div className="relative pt-20"> 
-      
-      <Header 
-        onSearch={handleSearch} 
-        onCategorySelect={handleCategorySelect} 
-      />
-      
-      <Slider />
-      
-      <main>
-        <Cards 
-          // Передаем текущие фильтры в Cards
-          searchTerm={searchTerm} 
-          categoryFilter={categoryFilter} 
-          onCategorySelect={handleCategorySelect}
-        />
-      </main>
+  <div className="relative"> 
+    <Header 
+      onSearch={handleSearch} 
+      onCategorySelect={handleCategorySelect} 
+    />
 
-      <Footer />
-    </div>
-  )
+    <Slider />
+
+    <main>
+      <Cards 
+        searchTerm={searchTerm} 
+        categoryFilter={categoryFilter} 
+        onCategorySelect={handleCategorySelect}
+      />
+    </main>
+
+    <Footer />
+  </div>
+)
+
 }
 
 export default Home;
