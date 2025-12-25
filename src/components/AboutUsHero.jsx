@@ -1,11 +1,12 @@
-// src/components/AboutUsHero.jsx
+
 import React from 'react';
 import { motion } from 'framer-motion';
 
 const AboutUsHero = () => {
   return (
     <section className="relative py-16 overflow-hidden">
-      {/* 🌌 Фон */}
+
+
       <div className="absolute inset-0 bg-gradient-to-br from-green-700 via-blue-800 to-black opacity-95"></div>
       <div className="absolute -top-20 -left-20 w-96 h-96 bg-green-500/30 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/30 rounded-full blur-3xl"></div>
@@ -16,7 +17,6 @@ const AboutUsHero = () => {
         transition={{ duration: 1 }}
         className="relative z-10 max-w-6xl mx-auto px-6 text-white"
       >
-        {/* Логотип жана Аты */}
         <div className="text-center md:text-left mb-6">
           <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
@@ -33,7 +33,6 @@ const AboutUsHero = () => {
           </motion.div>
         </div>
 
-        {/* Негизги текст */}
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -6,6 +6,7 @@ import Home from './components/pages/Home';
 import Admin from './components/pages/Admin';
 import Login from './components/Login';
 import About from './components/pages/About';
+import Contact from './components/Contact';
 import AS from './components/pages/Policy';
 
 
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path='/login' element={<Login />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/policy' element={<AS />} />
+                <Route path="/contacts" element={<Contact />} />
             </Routes>
 
         </div>

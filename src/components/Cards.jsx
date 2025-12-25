@@ -16,8 +16,7 @@ import { db } from "../firebase";
 import { useCart } from "./CartContext.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 
-// =============================================================
-// --- Alert Component ---
+
 const Alert = ({ message, type, onClose }) => {
   const isSuccess = type === "success";
   const bgColor = isSuccess ? "bg-green-500" : "bg-blue-500";
@@ -41,8 +40,7 @@ const Alert = ({ message, type, onClose }) => {
   );
 };
 
-// =============================================================
-// --- Format Price ---
+
 const formatSom = (amount) => {
   return new Intl.NumberFormat("ru-RU", {
     style: "currency",
@@ -53,8 +51,7 @@ const formatSom = (amount) => {
     .replace("KGS", "Сом");
 };
 
-// =============================================================
-// --- Product Modal ---
+
 const ProductModal = ({ product, isOpen, onClose }) => {
   const [quantity, setQuantity] = useState(1);
   const [alert, setAlert] = useState(null);
@@ -182,8 +179,6 @@ const ProductModal = ({ product, isOpen, onClose }) => {
   );
 };
 
-// =============================================================
-// --- ProductCard ---
 const ProductCard = ({ product, index }) => {
   const [alert, setAlert] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -223,7 +218,7 @@ const ProductCard = ({ product, index }) => {
 
         <div className="p-3 md:p-5 rounded-2xl bg-white flex flex-col space-y-3 h-full">
           
-          {/* ✅ Категория — сүрөттүн жогорку оң бурчунда, кичине жана таза */}
+          
           <div className="absolute top-2 right-2 md:top-3 md:right-3 z-20">
             <div className="px-2 py-0.5 md:px-2.5 md:py-1 rounded-full bg-gradient-to-r from-green-600 to-blue-600 shadow-md">
               <span className="text-[10px] md:text-xs font-semibold text-white">
@@ -232,7 +227,6 @@ const ProductCard = ({ product, index }) => {
             </div>
           </div>
 
-          {/* Сүрөт толук көрүнөт */}
           <motion.div
             whileHover={{ scale: 1.03 }}
             className="w-full aspect-square rounded-xl overflow-hidden relative shadow-md flex items-center justify-center bg-gray-100"
@@ -297,8 +291,6 @@ const ProductCard = ({ product, index }) => {
 };
 
 
-// =============================================================
-// --- Cards Component ---
 const Cards = ({ searchTerm, categoryFilter, onCategorySelect }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -396,7 +388,7 @@ const Cards = ({ searchTerm, categoryFilter, onCategorySelect }) => {
         {searchTerm || categoryFilter ? "Результаты поиска" : "Наши Товары"}
       </motion.h1>
 
-      {/* Categories */}
+     
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -428,7 +420,6 @@ const Cards = ({ searchTerm, categoryFilter, onCategorySelect }) => {
         ))}
       </motion.div>
 
-      {/* Products Grid */}
       {finalFilteredProducts.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 px-2">
           {finalFilteredProducts.map((product, index) => (

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Router from "./router";
+import Contact from "./components/Contact";
 import CartModal from "./components/CartModal";
 import { CartProvider } from "./components/CartContext";
-import CustomCursor from "./components/CustomCursor";
 import { fetchData } from "./api";
 
 const App = () => {
@@ -24,7 +24,6 @@ const App = () => {
     <CartProvider>
       <Router />
       <CartModal />
-      {!isMobile && <CustomCursor />}
     </CartProvider>
   );
 };

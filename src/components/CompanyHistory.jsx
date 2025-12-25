@@ -32,7 +32,7 @@ const historyEvents = [
 const CompanyHistory = () => {
   return (
     <section className="relative py-16 overflow-hidden">
-      {/* 🌌 Фон */}
+      
       <div className="absolute inset-0 bg-gradient-to-br from-green-700 via-blue-800 to-black opacity-95"></div>
       <div className="absolute -top-20 left-0 w-96 h-96 bg-green-400/30 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl"></div>

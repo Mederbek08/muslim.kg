@@ -80,12 +80,12 @@ function Footer() {
                 </NavLink>
               </li>
               <li>
-                <a
-                  href="#contacts"
+                <NavLink
+                  to="/contacts"
                   className="text-gray-400 hover:text-green-400 transition-colors duration-200 text-sm inline-block hover:translate-x-1 transform"
                 >
                   Контакты
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>

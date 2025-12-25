@@ -5,7 +5,7 @@ import { LightBulbIcon, EyeIcon } from '@heroicons/react/24/solid';
 const MissionVision = () => {
   return (
     <section className="relative py-16 overflow-hidden">
-      {/* 🌌 Фон */}
+  
       <div className="absolute inset-0 bg-gradient-to-br from-green-700 via-blue-800 to-black opacity-95"></div>
       <div className="absolute top-0 left-0 w-96 h-96 bg-green-400/30 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl"></div>
